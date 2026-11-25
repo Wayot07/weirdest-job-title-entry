@@ -47,13 +47,15 @@ function fail(message: string): never {
 }
 
 function main(): void {
-  // Pre-write gate: 1-60 characters, a single line, not only whitespace.
+  // Pre-write gate — competition rule: the entry must be a single job
+  // title of at most 60 characters and nothing else. Enforced here as:
+  // 1-60 characters, a single line, not only whitespace.
   if (ENTRY_TITLE.length === 0) {
     fail("entry title must not be empty");
   }
   const chars = [...ENTRY_TITLE];
   if (chars.length < 1 || chars.length > 60) {
-    fail(`entry title must be 1-60 characters, got ${chars.length}`);
+    fail(`entry title violates the 60-char rule: must be 1-60 characters, got ${chars.length}`);
   }
   if (ENTRY_TITLE.trim() !== ENTRY_TITLE) {
     fail("entry title must not have leading or trailing whitespace");
